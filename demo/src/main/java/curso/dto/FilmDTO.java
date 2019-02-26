@@ -160,6 +160,6 @@ public class FilmDTO implements Serializable {
 				source.getRentalRate(), 
 				source.getReplacementCost(), 
 				source.getLanguage().getId(), 
-				source.getVO().getId());
+				source.getVO() != null ? source.getVO().getId() : 0);
 	}
 }

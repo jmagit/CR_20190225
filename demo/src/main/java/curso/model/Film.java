@@ -44,8 +44,8 @@ public class Film implements Serializable {
 	@Column(name="replacement_cost")
 	private BigDecimal replacementCost;
 
-	@Column(name="special_features")
-	private Object specialFeatures;
+//	@Column(name="special_features")
+//	private Object specialFeatures;
 
 	private String title;
 
@@ -146,13 +146,13 @@ public class Film implements Serializable {
 		this.replacementCost = replacementCost;
 	}
 
-	public Object getSpecialFeatures() {
-		return this.specialFeatures;
-	}
-
-	public void setSpecialFeatures(Object specialFeatures) {
-		this.specialFeatures = specialFeatures;
-	}
+//	public Object getSpecialFeatures() {
+//		return this.specialFeatures;
+//	}
+//
+//	public void setSpecialFeatures(Object specialFeatures) {
+//		this.specialFeatures = specialFeatures;
+//	}
 
 	public String getTitle() {
 		return this.title;
