@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import curso.model.Film;
 import curso.model.FilmActor;
@@ -25,6 +27,8 @@ public class FilmDTO implements Serializable {
 	private int id;
 	private String description;
 	private Timestamp lastUpdate;
+	@Size(max=255)
+	@NotBlank
 	private String title;
 	private int length;
 	private String rating;

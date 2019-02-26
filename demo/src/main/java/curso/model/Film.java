@@ -2,6 +2,12 @@ package curso.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.sql.Timestamp;
@@ -33,6 +39,7 @@ public class Film implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="release_year")
+	@Past
 	private Date releaseYear;
 
 	@Column(name="rental_duration")
@@ -47,28 +54,35 @@ public class Film implements Serializable {
 //	@Column(name="special_features")
 //	private Object specialFeatures;
 
+	@Size(max=255)
+	@NotBlank
 	private String title;
 
 	//bi-directional many-to-one association to Language
 	@ManyToOne
 	@JoinColumn(name="language_id")
+	@JsonIgnore
 	private Language language;
 
 	//bi-directional many-to-one association to Language
 	@ManyToOne
 	@JoinColumn(name="original_language_id")
+	@JsonIgnore
 	private Language VO;
 
 	//bi-directional many-to-one association to FilmActor
 	@OneToMany(mappedBy="film")
+	@JsonIgnore
 	private List<FilmActor> filmActors;
 
 	//bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy="film")
+	@JsonIgnore
 	private List<FilmCategory> filmCategories;
 
 	//bi-directional many-to-one association to Inventory
 	@OneToMany(mappedBy="film")
+	@JsonIgnore
 	private List<Inventory> inventories;
 
 	public Film() {

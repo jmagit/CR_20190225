@@ -8,5 +8,6 @@ import curso.model.Film;
 
 public interface FilmRepository extends JpaRepository<Film, Integer> {
 	List<Film> findByTitleStartingWith(String tittle);
+	List<Film> findTop5ByTitleStartingWith(String tittle);
 
 }
