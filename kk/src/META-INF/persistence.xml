@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="kk">
+		<class>curso.model.Actor</class>
+		<class>curso.model.Address</class>
+		<class>curso.model.Category</class>
+		<class>curso.model.City</class>
+		<class>curso.model.Country</class>
+		<class>curso.model.Customer</class>
+		<class>curso.model.Film</class>
+		<class>curso.model.FilmActor</class>
+		<class>curso.model.FilmActorPK</class>
+		<class>curso.model.FilmCategory</class>
+		<class>curso.model.FilmCategoryPK</class>
+		<class>curso.model.Inventory</class>
+		<class>curso.model.Language</class>
+		<class>curso.model.Payment</class>
+		<class>curso.model.Rental</class>
+		<class>curso.model.Staff</class>
+		<class>curso.model.Store</class>
+	</persistence-unit>
+</persistence>
