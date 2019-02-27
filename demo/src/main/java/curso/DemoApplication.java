@@ -63,9 +63,9 @@ public class DemoApplication implements CommandLineRunner {
 //				.map(item->modelMapper.map(item, CountryDTO.class))
 //				.collect(Collectors.toList()))
 //			System.out.println(item.toString());
-		ObjectMapper objectMapper = new ObjectMapper();
+		//ObjectMapper objectMapper = new ObjectMapper();
 		//System.out.println(objectMapper.writeValueAsString(FilmDTO.form(dao.getOne(1))));
-		System.out.println(objectMapper.writeValueAsString(dao.getOne(1)));
+		//System.out.println(objectMapper.writeValueAsString(dao.getOne(1)));
 	}
 
 }
