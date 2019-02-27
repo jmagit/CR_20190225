@@ -26,7 +26,10 @@ import curso.model.FilmActor;
 import curso.model.FilmCategory;
 import curso.model.Inventory;
 import curso.model.Language;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(value = "Entidad Peliculas", description = "Información completa de la pelicula")
 public class FilmDTO extends ResourceSupport  implements Serializable {
 	private int idFilm;
 	private String description;
@@ -34,6 +37,7 @@ public class FilmDTO extends ResourceSupport  implements Serializable {
 	private Timestamp lastUpdate;
 	@Size(max=255)
 	@NotBlank
+	@ApiModelProperty(value = "Titulo de la pelicula que no debe estar en blanco", required = true)
 	private String title;
 	private int length;
 	private String rating;
@@ -43,6 +47,7 @@ public class FilmDTO extends ResourceSupport  implements Serializable {
 	private BigDecimal rentalRate;
 	private BigDecimal replacementCost;
 	private byte idLanguage;
+	@ApiModelProperty(value = "Idioma de la version original")
 	private byte idVO;
 	public FilmDTO() {}
 	public FilmDTO(int id, String title, String description, Timestamp lastUpdate, int length, String rating,

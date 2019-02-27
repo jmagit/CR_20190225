@@ -20,7 +20,9 @@ import curso.dto.FilmListDTO;
 import curso.model.Film;
 import curso.repository.CountryRepository;
 import curso.repository.FilmRepository;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+@EnableSwagger2
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 

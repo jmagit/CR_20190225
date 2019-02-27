@@ -30,11 +30,16 @@ import curso.model.Film;
 import curso.repository.FilmRepository;
 import curso.resource.exception.BadRequestException;
 import curso.resource.exception.NotFoundException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @RestController
 @RequestMapping(path="/pelis")
+@Api(value = "Microservice Peliculas", description = "API que permite el mantenimiento de peliculas")
 public class FilmResource {
 	@Autowired
 	private FilmRepository dao;
@@ -62,6 +67,12 @@ public class FilmResource {
 	}
 
 	@PostMapping
+	@GetMapping(path = "/{id}")
+	@ApiOperation(value = "Crea una pelicula", notes = "La pelicula no debe existir" )
+	@ApiResponses({
+		@ApiResponse(code = 201, message = "Se ha creado la pelicula"),
+		@ApiResponse(code = 400, message = "La pelicula ya existia o hay ....")
+	})
 	public ResponseEntity<Object> create(@Valid @RequestBody FilmDTO item) throws BadRequestException {
 		Film newItem = FilmDTO.form(item);
 		Set<ConstraintViolation<@Valid Film>> constraintViolations =  
