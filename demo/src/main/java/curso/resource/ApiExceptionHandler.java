@@ -12,6 +12,7 @@ import curso.resource.exception.NotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.orm.jpa.JpaSystemException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
@@ -23,7 +24,9 @@ public class ApiExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ BadRequestException.class})
+    @ExceptionHandler({ 
+    	BadRequestException.class, 
+    	JpaSystemException.class})
     @ResponseBody
     public ErrorMessage badRequest(Exception exception) {
         return new ErrorMessage(exception.getMessage(), "");

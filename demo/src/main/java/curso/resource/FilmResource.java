@@ -31,6 +31,8 @@ import curso.repository.FilmRepository;
 import curso.resource.exception.BadRequestException;
 import curso.resource.exception.NotFoundException;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+
 @RestController
 @RequestMapping(path="/pelis")
 public class FilmResource {
@@ -51,7 +53,12 @@ public class FilmResource {
 		Optional<Film> rslt = dao.findById(id);
 		if(!rslt.isPresent())
 			throw new NotFoundException();
-		return FilmDTO.form(rslt.get());
+		FilmDTO item = FilmDTO.form(rslt.get());
+		item.add(linkTo(FilmResource.class).slash(id).withSelfRel());
+		item.add(linkTo(FilmResource.class).slash(1).withRel("first"));
+		item.add(linkTo(FilmResource.class).slash(id).slash("actores").withRel("actores"));
+		item.add(linkTo(FilmResource.class).slash(id).slash("category").withRel("categorias"));
+		return item;
 	}
 
 	@PostMapping
@@ -61,7 +68,7 @@ public class FilmResource {
 				validator.validate( newItem );
 		if(constraintViolations.size() > 0)
 			throw new BadRequestException("Errores de validación");
-		Optional<Film> rslt = dao.findById(item.getId());
+		Optional<Film> rslt = dao.findById(item.getIdFilm());
 		if(rslt.isPresent())
 			throw new BadRequestException("Elemento duplicado");
 		dao.save(newItem);
@@ -72,9 +79,9 @@ public class FilmResource {
 	@PutMapping("/{id}")
 	@ResponseStatus(code=HttpStatus.NO_CONTENT)
 	public void update(@PathVariable int id, @Valid @RequestBody FilmDTO item) throws BadRequestException, NotFoundException {
-		if (id != item.getId())
+		if (id != item.getIdFilm())
 			throw new BadRequestException("Bad identifier");
-		Optional<Film> rslt = dao.findById(item.getId());
+		Optional<Film> rslt = dao.findById(item.getIdFilm());
 		if(!rslt.isPresent())
 			throw new NotFoundException();
 		Film newItem = FilmDTO.form(item);
@@ -91,6 +98,14 @@ public class FilmResource {
 		if(!rslt.isPresent())
 			throw new NotFoundException();
 		dao.deleteById(id);
+	}
+
+	@GetMapping("/{id}/actores")
+	public FilmDTO getAllActores(@PathVariable int id) throws NotFoundException {
+		Optional<Film> rslt = dao.findById(id);
+		if(!rslt.isPresent())
+			throw new NotFoundException();
+		return FilmDTO.form(rslt.get());
 	}
 
 }

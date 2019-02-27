@@ -17,21 +17,27 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.hateoas.ResourceSupport;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import curso.model.Film;
 import curso.model.FilmActor;
 import curso.model.FilmCategory;
 import curso.model.Inventory;
 import curso.model.Language;
 
-public class FilmDTO implements Serializable {
-	private int id;
+public class FilmDTO extends ResourceSupport  implements Serializable {
+	private int idFilm;
 	private String description;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Timestamp lastUpdate;
 	@Size(max=255)
 	@NotBlank
 	private String title;
 	private int length;
 	private String rating;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy")
 	private Date releaseYear;
 	private byte rentalDuration;
 	private BigDecimal rentalRate;
@@ -42,7 +48,7 @@ public class FilmDTO implements Serializable {
 	public FilmDTO(int id, String title, String description, Timestamp lastUpdate, int length, String rating,
 			Date releaseYear, byte rentalDuration, BigDecimal rentalRate, BigDecimal replacementCost, byte idLanguage,
 			byte idVO) {
-		this.id = id;
+		this.idFilm = id;
 		this.title = title;
 		this.description = description;
 		this.lastUpdate = lastUpdate;
@@ -55,11 +61,11 @@ public class FilmDTO implements Serializable {
 		this.idLanguage = idLanguage;
 		this.idVO = idVO;
 	}
-	public int getId() {
-		return id;
+	public int getIdFilm() {
+		return idFilm;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdFilm(int id) {
+		this.idFilm = id;
 	}
 	public String getDescription() {
 		return description;
@@ -129,11 +135,11 @@ public class FilmDTO implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "FilmDTO [id=" + id + ", title=" + title + "]";
+		return "FilmDTO [id=" + idFilm + ", title=" + title + "]";
 	}
 	public static Film form(FilmDTO source) {
 		Film target = new Film();
-		target.setId(source.getId());
+		target.setId(source.getIdFilm());
 		target.setTitle(source.getTitle());
 		target.setDescription(source.getDescription());
 		Language language = new Language();
@@ -142,10 +148,10 @@ public class FilmDTO implements Serializable {
 		Language vo = new Language();
 		vo.setId(source.getIdVO());
 		target.setVO(vo);
-		target.setLastUpdate(source.getLastUpdate());
+//		target.setLastUpdate(source.getLastUpdate());
 		target.setLength(source.getLength());
 		target.setRating(source.getRating());
-		target.setReleaseYear(source.getReleaseYear());
+//		target.setReleaseYear(source.getReleaseYear());
 		target.setRentalDuration(source.getRentalDuration());
 		target.setRentalRate(source.getRentalRate());
 		target.setReplacementCost(source.getReplacementCost());
