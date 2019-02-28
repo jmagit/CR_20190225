@@ -17,7 +17,7 @@ public class Country implements Serializable {
 
 	@Id
 	@Column(name="country_id")
-	private int id;
+	private int idCountry;
 
 	private String country;
 
@@ -31,12 +31,12 @@ public class Country implements Serializable {
 	public Country() {
 	}
 
-	public int getId() {
-		return this.id;
+	public int getIdCountry() {
+		return this.idCountry;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdCountry(int idCountry) {
+		this.idCountry = idCountry;
 	}
 
 	public String getCountry() {
