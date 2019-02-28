@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,8 +48,8 @@ public class FilmResource {
 	private Validator validator;
 	
 	@GetMapping
-	public List<FilmDTO> getAll() {
-		return dao.findAll().stream()
+	public List<FilmDTO> getAll(Pageable pag) {
+		return dao.findAll(pag).stream()
 		.map(item->FilmDTO.form(item))
 		.collect(Collectors.toList());
 	}

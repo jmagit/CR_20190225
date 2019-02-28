@@ -1,0 +1,11 @@
+<h1>Listado de Peliculas</h1>
+<p>
+  <button [disabled]="numPag===0" (click)="cargar(-1)">Anterior</button>
+  <button (click)="cargar(1)">Siguiente</button>
+</p>
+<div>{{msg}}</div>
+<ul>
+  <li *ngFor="let item of listado">
+    {{item.title}}
+  </li>
+</ul>
