@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  msg = 'angular';
+  msg: any;
   numPag = 0;
   listado: any;
 
